@@ -2,7 +2,9 @@ import { createTransport } from 'nodemailer';
 
 export default (email) => {
     const transporter = createTransport({
-        service: 'gmail',
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.USER,
             pass: process.env.PASS
@@ -20,10 +22,11 @@ export default (email) => {
     `
     };
 
-    transporter.sendMail(mail, function (err, info) {
-        if (err)
-            console.error(err)
-        else
-            console.info(info);
-    });
+    transporter.sendMail(mail,
+        function (err, info) {
+            if (err)
+                console.error(err)
+            else
+                console.info(info);
+        });
 }
